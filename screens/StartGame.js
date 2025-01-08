@@ -1,4 +1,4 @@
-import {TextInput,View,StyleSheet,Alert} from 'react-native'
+import {TextInput,View,StyleSheet,Alert,Text} from 'react-native'
 import PrimaryButton from '../components/PrimaryButton'
 import { useState } from 'react'
 
@@ -36,24 +36,30 @@ function StartGameScreen({onPick}){
 
 
     return(
-       <View style={styles.inputContainer}>
-            <TextInput 
-                maxLength={2} 
-                keyboardType='number-pad'  
-                autoCapitalize='none' 
-                style={styles.textInput}
-                value={formEntered}
-                onChangeText={numerEnter}
-                ></TextInput>
-            <View style={styles.buttonContainer}>
-                <View style={styles.button}>
-                    <PrimaryButton onPress={reset}>Reset</PrimaryButton>
-                </View>
-                <View style={styles.button}>
-                    <PrimaryButton onPress={confirm} style={styles.button}>Confirm</PrimaryButton>
-                </View>
+        <View>
+             <View style={styles.titleContainer}>
+                <Text style={styles.title}>Guess My Number</Text>
             </View>
-            
+      
+                <View style={styles.inputContainer}>
+                        <TextInput 
+                            maxLength={2} 
+                            keyboardType='number-pad'  
+                            autoCapitalize='none' 
+                            style={styles.textInput}
+                            value={formEntered}
+                            onChangeText={numerEnter}
+                            ></TextInput>
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.button}>
+                                <PrimaryButton onPress={reset}>Reset</PrimaryButton>
+                            </View>
+                            <View style={styles.button}>
+                                <PrimaryButton onPress={confirm} style={styles.button}>Confirm</PrimaryButton>
+                            </View>
+                        </View>
+
+                </View>
        </View>
     )
 }
@@ -63,7 +69,6 @@ const styles= StyleSheet.create({
         marginHorizontal:24,
         borderRadius:8,
         padding:16,
-        marginTop:100,
         backgroundColor:'#FF4400',
         elevation:4,
         shadowColor:'black',
@@ -92,6 +97,23 @@ const styles= StyleSheet.create({
     ,
     button:{
         flex:1
+    }
+    ,
+    title:{
+        fontSize:22,
+        color:'white',
+
+    }
+    ,
+    titleContainer:{
+        alignItems:'center',
+        justifyContent:'center',
+        borderWidth:2,
+        borderColor:'white',
+        borderRadius:10,
+        marginHorizontal:16,
+        padding:10,
+        marginBottom:20
     }
 })
 

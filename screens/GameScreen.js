@@ -47,7 +47,7 @@ function GameScreen({number,onGameOver}){
             Alert.alert('invalid number! ','you lied!',[{text:"dont lie again",style:'destructive'}]);
             return;
         }
-        console.log(tryes)
+        console.log(numberRange.try)
 
 
     }

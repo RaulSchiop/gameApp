@@ -11,6 +11,7 @@ export default function App() {
 
   function StartGameHandler(pickedNumber){
     setNumber(pickedNumber)
+    setGameOver(false)
   }
 
   function gameOverHandler(){
