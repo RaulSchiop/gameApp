@@ -1,15 +1,57 @@
 import {Text,StyleSheet,View} from 'react-native'
 import PrimaryButton from '../components/PrimaryButton';
+import { useEffect, useState } from 'react';
+import HeaderText from '../components/HeaderText';
 
 
-function GameScreen(){
+function GameScreen({number}){
+    const [currentNUmber,setCurrentNumber]=useState('');
+    const [tryes,setTryes]=useState([]);
+    const [numberRange,setNumberRange]=useState({
+        min:1,
+        max:99,
+    })
+
+    useEffect(()=>{
+        function getArandomInRange() {
+            setCurrentNumber(Math.floor(Math.random() * (numberRange.max - numberRange.min) + numberRange.min))
+        }
+
+        getArandomInRange() 
+    
+    },[numberRange.max,numberRange.min])
+
+ 
+    function higher(){
+
+        if(number>currentNUmber){
+            setNumberRange({
+                min:currentNUmber+1,
+                max:99
+            })
+        }else if(number<currentNUmber){
+
+            
+
+        }
+
+
+
+    }
+
+    function lower(){
+
+    }
+
+
+
     return (
         <View>
         <View style={styles.header}>
-            <Text style={styles.HeaderText}>Computer Turn</Text>
+            <HeaderText style={styles.HeaderText}>Computer Turn</HeaderText>
         </View>
         <View style={styles.container}>
-            <Text style={styles.HeaderText}>50</Text>
+            <HeaderText>{currentNUmber}</HeaderText>
         </View>
                 <View style={styles.containerButtons}>
                     <Text style={styles.text}>Higher or lower</Text>
@@ -22,7 +64,9 @@ function GameScreen(){
                         </View>
                     </View>
                 </View>
-            
+            <View>
+        
+            </View>
         </View>
        
     )
@@ -42,8 +86,9 @@ const styles=StyleSheet.create({
     }
     ,
     header:{
-        marginTop:100,
+    
         padding:16,
+        borderRadius:10,
         alignItems:'center',
         textAlign:'center',
         marginHorizontal:24,
@@ -52,13 +97,7 @@ const styles=StyleSheet.create({
     }
     ,
     text:{
-        fontSize:32,
-        textAlign:'center',
-        color:'white'
-    }
-    ,
-    HeaderText:{
-        fontSize:32,
+        fontSize:22,
         textAlign:'center',
         color:'white'
     }
@@ -75,7 +114,7 @@ const styles=StyleSheet.create({
         shadowOpacity:0.25,
         shadowRadius:6,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
     }
     ,
     twoButtons:{
