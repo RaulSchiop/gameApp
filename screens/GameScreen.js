@@ -1,46 +1,70 @@
-import {Text,StyleSheet,View} from 'react-native'
+import {Text,StyleSheet,View,FlatList,Alert} from 'react-native'
 import PrimaryButton from '../components/PrimaryButton';
 import { useEffect, useState } from 'react';
 import HeaderText from '../components/HeaderText';
 
 
-function GameScreen({number}){
+function GameScreen({number,onGameOver}){
     const [currentNUmber,setCurrentNumber]=useState('');
+   
     const [tryes,setTryes]=useState([]);
     const [numberRange,setNumberRange]=useState({
         min:1,
         max:99,
+        try:0
     })
+    
 
     useEffect(()=>{
+
         function getArandomInRange() {
             setCurrentNumber(Math.floor(Math.random() * (numberRange.max - numberRange.min) + numberRange.min))
         }
 
-        getArandomInRange() 
-    
-    },[numberRange.max,numberRange.min])
+        getArandomInRange()
+
+      
+    },[numberRange])
+
+    useEffect(()=>{
+        if(number===currentNUmber){
+            onGameOver()
+        }
+    },[currentNUmber,onGameOver,number])
 
  
     function higher(){
 
         if(number>currentNUmber){
-            setNumberRange({
+            setTryes((prev)=>[...prev,currentNUmber])
+            setNumberRange((prevRange)=>({
                 min:currentNUmber+1,
-                max:99
-            })
-        }else if(number<currentNUmber){
-
+                max:prevRange.max,
+                try:prevRange.try+1
+            }))
             
-
+        }else if(number<currentNUmber){
+            Alert.alert('invalid number! ','you lied!',[{text:"dont lie again",style:'destructive'}]);
+            return;
         }
-
+        console.log(tryes)
 
 
     }
 
     function lower(){
-
+        if(number<currentNUmber){
+            setTryes((prev)=>[...prev,currentNUmber])
+            setNumberRange((prevRange) => ({
+                min: prevRange.min,
+                max: currentNUmber - 1,
+                try:prevRange.try+1
+              }));
+        }else if(number>currentNUmber){
+            Alert.alert('invalid number! ','you lied!',[{text:"dont lie again",style:'destructive'}]);
+            return;
+        }
+        console.log(tryes)
     }
 
 
@@ -57,15 +81,24 @@ function GameScreen({number}){
                     <Text style={styles.text}>Higher or lower</Text>
                     <View style={styles.twoButtons}>
                         <View style={styles.button}> 
-                            <PrimaryButton>+</PrimaryButton>
+                            <PrimaryButton onPress={higher}>+</PrimaryButton>
                         </View>
                         <View style={styles.button}>
-                            <PrimaryButton>-</PrimaryButton>
+                            <PrimaryButton onPress={lower}>-</PrimaryButton>
                         </View>
                     </View>
                 </View>
-            <View>
-        
+            <View style={styles.containerList}>
+            <FlatList
+                data={tryes}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={(itemData) => (
+                    <View style={styles.listItem}>
+                    <Text style={styles.listText}>Attempt: {itemData.item}</Text>
+                    </View>
+                )}
+                />
+
             </View>
         </View>
        
@@ -106,7 +139,7 @@ const styles=StyleSheet.create({
         marginHorizontal:24,
         borderRadius:8,
         padding:16,
-        marginTop:50,
+        marginTop:10,
         backgroundColor:'#FF4400',
         elevation:4,
         shadowColor:'black',
@@ -124,6 +157,26 @@ const styles=StyleSheet.create({
     button:{
         flex:1,
     }
+    ,
+    containerList:{
+
+        marginTop:10,
+    }
+    ,
+    listItem: {
+       
+        marginTop:4,
+        padding: 8,
+        marginVertical: 4,
+        marginHorizontal:24,
+        borderRadius: 6,
+        backgroundColor: '#FF4400',
+      },
+      listText: {
+        color: 'white',
+        fontSize: 18,
+        textAlign: 'center',
+      },
 
 })
 
