@@ -1,14 +1,11 @@
-import { Text, View } from "react-native"
+import { Text, View } from "react-native";
 
-function GameOver(){
-
-    return(
-        <View>
-            <Text style={{color:"white"}}>Game  Over</Text>
-        </View>
-    )
-
+function GameOver() {
+   return (
+      <View>
+         <Text style={{ color: "white" }}>Game Over</Text>
+      </View>
+   );
 }
 
-
-export default GameOver
+export default GameOver;
