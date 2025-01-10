@@ -1,6 +1,7 @@
 import { Text, StyleSheet, View, FlatList, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useEffect, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import HeaderText from "../components/HeaderText";
 
 function GameScreen({ number, onGameOver }) {
@@ -78,10 +79,14 @@ function GameScreen({ number, onGameOver }) {
             <Text style={styles.text}>Higher or lower</Text>
             <View style={styles.twoButtons}>
                <View style={styles.button}>
-                  <PrimaryButton onPress={higher}>+</PrimaryButton>
+                  <PrimaryButton onPress={higher}>
+                    <Ionicons name="add" size={20} color="black" ></Ionicons>
+                  </PrimaryButton>
                </View>
                <View style={styles.button}>
-                  <PrimaryButton onPress={lower}>-</PrimaryButton>
+                  <PrimaryButton onPress={lower}>
+                  <Ionicons name="remove" size={20} color="black" ></Ionicons>
+                  </PrimaryButton>
                </View>
             </View>
          </View>
@@ -144,6 +149,7 @@ const styles = StyleSheet.create({
    },
    twoButtons: {
       flexDirection: "row",
+      padding: 10,
    },
    button: {
       flex: 1,
