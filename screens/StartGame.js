@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
       marginBottom: 20,
    },
    containerList: {
+      flex: 5,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 30,

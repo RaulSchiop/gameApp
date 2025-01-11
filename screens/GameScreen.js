@@ -69,7 +69,7 @@ function GameScreen({ number, onGameOver,getTryes }) {
    }
 
    return (
-      <View>
+      <View style={{flex:1}}>
          <View style={styles.header}>
             <HeaderText style={styles.HeaderText}>Computer Turn</HeaderText>
          </View>
@@ -157,6 +157,8 @@ const styles = StyleSheet.create({
    },
    containerList: {
       marginTop: 10,
+      flex:5
+      
    },
    listItem: {
       marginTop: 4,
