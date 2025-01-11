@@ -68,21 +68,23 @@ function StartGameScreen({ onPick, logs }) {
                   data={logs}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={(itemData) => (
-                     <View style={styles.listItem}>
-                        <Text
-                           style={{
-                              color: "white",
-                              fontSize: 18,
-                              marginHorizontal: 10,
-                              textAlignVertical: "center",
-                              textAlign: "center",
-                           }}
-                        >
-                           {itemData.item.logNumber}.
-                        </Text>
-                        <Text style={styles.listText}>
-                           Opponent guessed: {itemData.item.number}
-                        </Text>
+                     <View style={styles.listWrapper}>
+                        <View style={styles.listItem}>
+                           <Text
+                              style={{
+                                 color: "white",
+                                 fontSize: 18,
+                                 marginHorizontal: 10,
+                                 textAlignVertical: "center",
+                                 textAlign: "center",
+                              }}
+                           >
+                              {itemData.item.logNumber}.
+                           </Text>
+                           <Text style={styles.listText}>
+                              Opponent guessed: {itemData.item.number}
+                           </Text>
+                        </View>
                      </View>
                   )}
                ></FlatList>
@@ -145,16 +147,26 @@ const styles = StyleSheet.create({
    },
    listItem: {
       flexDirection: "row",
+      justifyContent: "space-between",
       marginTop: 10,
-      padding: 15,
+      padding: 20,
       marginVertical: 4,
-      marginHorizontal: 24,
       borderRadius: 6,
       backgroundColor: "#FF4400",
+      width: "100%",
+      elevation: 4,
+      shadowColor: "black",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 6,
    },
    listText: {
       color: "white",
       fontSize: 18,
+   },
+   listWrapper: {
+      width: "93%",
+      alignSelf: "center",
    },
 });
 
