@@ -1,8 +1,15 @@
-import { TextInput, View, StyleSheet, Alert, Text } from "react-native";
+import {
+   TextInput,
+   View,
+   StyleSheet,
+   Alert,
+   Text,
+   FlatList,
+} from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 
-function StartGameScreen({ onPick }) {
+function StartGameScreen({ onPick, logs }) {
    const [formEntered, setFormEntered] = useState("");
 
    function numerEnter(enteredText) {
@@ -27,7 +34,7 @@ function StartGameScreen({ onPick }) {
    }
 
    return (
-      <View>
+      <View style={{ flex: 1 }}>
          <View style={styles.titleContainer}>
             <Text style={styles.title}>Guess My Number</Text>
          </View>
@@ -52,6 +59,35 @@ function StartGameScreen({ onPick }) {
                </View>
             </View>
          </View>
+         {logs.length === 0 ? (
+            <></>
+         ) : (
+            <View style={styles.containerList}>
+               <Text style={styles.title}>Past games</Text>
+               <FlatList
+                  data={logs}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={(itemData) => (
+                     <View style={styles.listItem}>
+                        <Text
+                           style={{
+                              color: "white",
+                              fontSize: 18,
+                              marginHorizontal: 10,
+                              textAlignVertical: "center",
+                              textAlign: "center",
+                           }}
+                        >
+                           {itemData.item.logNumber}.
+                        </Text>
+                        <Text style={styles.listText}>
+                           Opponent guessed: {itemData.item.number}
+                        </Text>
+                     </View>
+                  )}
+               ></FlatList>
+            </View>
+         )}
       </View>
    );
 }
@@ -101,6 +137,24 @@ const styles = StyleSheet.create({
       marginHorizontal: 16,
       padding: 10,
       marginBottom: 20,
+   },
+   containerList: {
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 30,
+   },
+   listItem: {
+      flexDirection: "row",
+      marginTop: 10,
+      padding: 15,
+      marginVertical: 4,
+      marginHorizontal: 24,
+      borderRadius: 6,
+      backgroundColor: "#FF4400",
+   },
+   listText: {
+      color: "white",
+      fontSize: 18,
    },
 });
 

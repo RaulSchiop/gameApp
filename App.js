@@ -13,7 +13,8 @@ import GameOver from "./screens/GameOverScreen";
 export default function App() {
    const [number, setNumber] = useState(null);
    const [gameOver, setGameOver] = useState(false);
-   const [tryes,setTryes]=useState()
+   const [tryes, setTryes] = useState();
+   const [gameLogs, setgameLogs] = useState([]);
 
    function StartGameHandler(pickedNumber) {
       setNumber(pickedNumber);
@@ -24,16 +25,45 @@ export default function App() {
       setGameOver(true);
    }
 
-   let screen = <StartGameScreen onPick={StartGameHandler}></StartGameScreen>;
+   function getTryes(tryes) {
+      setTryes(tryes);
+   }
+
+   function startNewGame() {
+      setgameLogs((prev) => [
+         ...prev,
+         { logNumber: prev.length + 1, pastTryes: tryes, number },
+      ]);
+      setNumber(null);
+      setTryes(0);
+      setGameOver(false);
+   }
+
+   let screen = (
+      <StartGameScreen
+         logs={gameLogs}
+         onPick={StartGameHandler}
+      ></StartGameScreen>
+   );
 
    if (number) {
       screen = (
-         <GameScreen number={number} onGameOver={gameOverHandler}></GameScreen>
+         <GameScreen
+            getTryes={getTryes}
+            number={number}
+            onGameOver={gameOverHandler}
+         ></GameScreen>
       );
    }
 
    if (gameOver) {
-      screen = <GameOver number={number}></GameOver>;
+      screen = (
+         <GameOver
+            tryes={tryes}
+            number={number}
+            startAgain={startNewGame}
+         ></GameOver>
+      );
    }
 
    return (

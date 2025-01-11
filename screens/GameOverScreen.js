@@ -2,7 +2,8 @@ import { Text, View, StyleSheet, Image, Pressable } from "react-native";
 import HeaderText from "../components/HeaderText";
 import PrimaryButton from "../components/PrimaryButton";
 
-function GameOver({ number }) {
+function GameOver({ number,tryes,startAgain }) {
+    console.log(tryes)
    return (
       <View style={{ alignItems: "center", justifyContent: "center", flex: 1,marginBottom:50 }}>
          <HeaderText style={{ fontSize: 60 }}>Game Over</HeaderText>
@@ -15,12 +16,12 @@ function GameOver({ number }) {
          </View>
 
          <Text style={styles.summaryBox}>
-            The computer took <Text style={styles.accerntFinal}>{number} </Text>
+            The computer took <Text style={styles.accerntFinal}>{tryes} </Text>
             tryes to guess the number{" "}
             <Text style={styles.accerntFinal}>{number}</Text>
          </Text>
          <View style={styles.buttonOuther}>
-            <Pressable  style={({pressed})=>pressed?[styles.pressed,styles.buttonContainer]:styles.buttonContainer} android_ripple={{color:"#BCBCBC"}}>
+            <Pressable onPress={startAgain} style={({pressed})=>pressed?[styles.pressed,styles.buttonContainer]:styles.buttonContainer} android_ripple={{color:"#BCBCBC"}}>
                <Text style={styles.buttonText}>Start Again</Text>
             </Pressable>
          </View>

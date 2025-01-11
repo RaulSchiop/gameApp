@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import HeaderText from "../components/HeaderText";
 
-function GameScreen({ number, onGameOver }) {
+function GameScreen({ number, onGameOver,getTryes }) {
    const [currentNUmber, setCurrentNumber] = useState("");
 
    const [tryes, setTryes] = useState([]);
@@ -30,6 +30,7 @@ function GameScreen({ number, onGameOver }) {
    useEffect(() => {
       if (number === currentNUmber) {
          onGameOver();
+         getTryes(numberRange.try)
       }
    }, [currentNUmber, onGameOver, number]);
 
