@@ -3,8 +3,9 @@ import PrimaryButton from "../components/PrimaryButton";
 import { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import HeaderText from "../components/HeaderText";
+import { Dimensions } from "react-native";
 
-function GameScreen({ number, onGameOver,getTryes }) {
+function GameScreen({ number, onGameOver, getTryes }) {
    const [currentNUmber, setCurrentNumber] = useState("");
 
    const [tryes, setTryes] = useState([]);
@@ -13,7 +14,6 @@ function GameScreen({ number, onGameOver,getTryes }) {
       max: 99,
       try: 0,
    });
-
    useEffect(() => {
       function getArandomInRange() {
          setCurrentNumber(
@@ -30,7 +30,7 @@ function GameScreen({ number, onGameOver,getTryes }) {
    useEffect(() => {
       if (number === currentNUmber) {
          onGameOver();
-         getTryes(numberRange.try)
+         getTryes(numberRange.try);
       }
    }, [currentNUmber, onGameOver, number]);
 
@@ -69,7 +69,7 @@ function GameScreen({ number, onGameOver,getTryes }) {
    }
 
    return (
-      <View style={{flex:1}}>
+      <View style={{ flex: 1, alignItems: "center" }}>
          <View style={styles.header}>
             <HeaderText style={styles.HeaderText}>Computer Turn</HeaderText>
          </View>
@@ -81,12 +81,12 @@ function GameScreen({ number, onGameOver,getTryes }) {
             <View style={styles.twoButtons}>
                <View style={styles.button}>
                   <PrimaryButton onPress={higher}>
-                    <Ionicons name="add" size={20} color="black" ></Ionicons>
+                     <Ionicons name="add" size={20} color="black"></Ionicons>
                   </PrimaryButton>
                </View>
                <View style={styles.button}>
                   <PrimaryButton onPress={lower}>
-                  <Ionicons name="remove" size={20} color="black" ></Ionicons>
+                     <Ionicons name="remove" size={20} color="black"></Ionicons>
                   </PrimaryButton>
                </View>
             </View>
@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
    },
    containerList: {
       marginTop: 10,
-      flex:5
-      
+      flex: 5,
    },
    listItem: {
       marginTop: 4,
